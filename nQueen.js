@@ -4,6 +4,8 @@ var graphdata1 = [];
 var graphdata2 = [];
 var graphdata3 = [];
 
+
+
 window.onload = function() {
 	console.log("Hooray! Its working");
 	taSol1 = document.getElementById('ta_sol1');
@@ -24,27 +26,26 @@ function runEmAll() {
     var start;
     var end;
     var n = 4;
-    for (var k = 4; k <= 10; k++) {
+    for (var k = 4; k <= 15; k++) {
         //Runs each solution and measures performance in microseconds
         console.log("In Forloop: Line 23, k = "+k+"\n");
         start = performance.now();
-        sol1(n);
+        //sol1(n);
         end = performance.now();
         taSol1.value += "" + n + ", " + (end - start) * 1000 + "\n";
-	graphdata1[k] = (end - start) * 1000;
+	      graphdata1[k-4] = (end - start) * 1000;
 	
         start = performance.now();
-        sol2(n);
+        //sol2(n);
         end = performance.now();
         taSol2.value += "" + n + ", " + (end - start) * 1000 + "\n";
-	graphdata2[k] = (end - start) * 1000;
-	console.log(graphdata2[k]);
+	      graphdata2[k-4] = (end - start) * 1000;
 
         start = performance.now();
         sol3(n);
         end = performance.now();
         taSol3.value += "" + n + ", " + (end - start) * 1000 + "\n";
-	graphdata3[k] = (end - start) * 1000;
+	      graphdata3[k-4] = (end - start) * 1000;
         n = n * 2;
     } //end for
 	Plotly.newPlot('Graph', data, layout);
@@ -80,33 +81,103 @@ var layout = {
 
 
 
-
 function sol1(n){
-	//Implement your brute-force solution here
+	     //Brute-force solution:
+	     i = 0;
+	     var columns=[];
+       bruteforce(columns, i, n)
+}
 
-	//--This is garbage code: Remove this--//
-	for (var i = 1; i <= n; i++) {
-		for (var j = 1; j <= n ; j=j*2) {
-			for(var k=0;k<50;k++);
-		}//end for j
-	}//end for i
-	//-- End of garbage code --//
+function bruteforce(columns, i, n) {
+    if (i === n) {
+        return columns;
+    }
 
-	//Mention reference where you got the solution
-	//Ref: http://
-	//Ref: If you found any paper
-}//end sol1
+	for (var j=0; j<n; j++) {
+        columns[i] = j;
+        if (noClash(columns, i)) {
+            var solution = bruteforce(columns, i+1, n);
+            if (solution) {
+                return solution;
+            }
+        }
+    }   
+    return false;
+}
 
-function sol2(n){
+function noClash(columns, i) {
+    for (var j=0; j<i; j++) {
+        if (columns[j] === columns[i]) {
+            return false;
+        }
+        if (i-j === Math.abs(columns[j]-columns[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+
+
+
+
+function sol2(n) {
 	//Implement your recursive back-tracking solution here
+  //Starting from 0 Row and 0 column:
+  directionBacktracking(Board(n), 0, 0 , n)
 
-	//--This is garbage code: Remove this--//
-	for (var i = 1; i <= n; i++) {
-		for (var j = 1; j <= n; j++) {
-			for(var k=0;k<50;k++);
-		}//end for i
-	}//end for j
-	//-- End of garbage code --//
+	function directionBacktracking(board, row, col,n){
+     
+     // Checking the conflicts:
+
+     for(var i=0; i<col; i++){
+       if (board[row][i] === 1) {
+         return false;
+       }
+     }
+       for(var i=row, j=col; i>=0 && j>=0; i--, j--){
+       if (board[i][j] === 1) {
+         return false;
+       }
+     }
+       for(var i=row, j=col; j>=0 && i<n; i++, j--){
+       if (board[i][j] === 1){
+         return false;
+       }
+     }
+   
+     return true;
+     
+   }
+   function Backtracking(board, col,n){
+      
+     if(col===n){
+       return;  
+     }
+   
+     for(var i=0; i<n; i++){
+       if(isSafe(board, i, col,n)){
+         board[i][col]=1;
+   
+         Backtracking(board, col+1,n);
+            
+         board[i][col]=0;
+       }
+     }
+     return false;
+   }
+   
+   function Board(n){
+     var board=[];
+     for(var i=0; i<n; i++){
+       board[i]=[];
+       for(var j=0; j<n; j++){
+         board[i][j]=0;
+       }
+     }
+     return board;
+   }
 
 	//Mention reference where you got the solution
 	//Ref: http://
@@ -116,11 +187,8 @@ function sol2(n){
 function sol3(n){
 	//Implement your dynammic programming solution here
 
-	//--This is garbage code: Remove this--//
-	for (var i = 1; i <= n; i++) {
-		for(var k=0;k<50;k++);
-	}//end for j
-	//--End of Garbage Code--//
+  
+
 
 	//Mention reference where you got the solution
 	//Ref: http://
