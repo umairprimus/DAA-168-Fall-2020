@@ -10,6 +10,9 @@ window.onload = function() {
     } //end window.onload
 
 function runEmAll() {
+    console.log("Final Project of DAA Fall 2020")
+    console.log("Made by Umair, Taha & Aziz (Class MCS)")
+    console.log("Start------------")
     console.log("Running All Solutions")
     taSol1.value = "";
     taSol2.value = "";
