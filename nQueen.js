@@ -1,17 +1,21 @@
 var taSol1, taSol2, taSol3;
 var btnRun;
+var graphdata1 = [];
+var graphdata2 = [];
+var graphdata3 = [];
 
 window.onload = function() {
-        console.log("Hooray! Its working");
-        taSol1 = document.getElementById('ta_sol1');
-        taSol2 = document.getElementById('ta_sol2');
-        taSol3 = document.getElementById('ta_sol3');
-        btnRun = document.getElementById('btnRun');
-    } //end window.onload
+	console.log("Hooray! Its working");
+	taSol1 = document.getElementById('ta_sol1');
+	taSol2 = document.getElementById('ta_sol2');
+	taSol3 = document.getElementById('ta_sol3');
+	btnRun = document.getElementById('btnRun');
+
+} //end window.onload
 
 function runEmAll() {
     console.log("Final Project of DAA Fall 2020")
-    console.log("Made by Umair, Taha & Aziz (Class MCS)")
+    console.log("Made by Umair, Taha & Aziz (Class of MCS)")
     console.log("Start------------")
     console.log("Running All Solutions")
     taSol1.value = "";
@@ -20,144 +24,102 @@ function runEmAll() {
     var start;
     var end;
     var n = 4;
-    for (var k = 4; k <= 16; k++) {
+    for (var k = 4; k <= 10; k++) {
         //Runs each solution and measures performance in microseconds
-        console.log("In Forloop: Line 18, k = " + k + "\n");
+        console.log("In Forloop: Line 23, k = "+k+"\n");
         start = performance.now();
         sol1(n);
         end = performance.now();
         taSol1.value += "" + n + ", " + (end - start) * 1000 + "\n";
-
+	graphdata1[k] = (end - start) * 1000;
+	
         start = performance.now();
         sol2(n);
         end = performance.now();
         taSol2.value += "" + n + ", " + (end - start) * 1000 + "\n";
+	graphdata2[k] = (end - start) * 1000;
+	console.log(graphdata2[k]);
 
         start = performance.now();
         sol3(n);
         end = performance.now();
         taSol3.value += "" + n + ", " + (end - start) * 1000 + "\n";
+	graphdata3[k] = (end - start) * 1000;
         n = n * 2;
     } //end for
-
+	Plotly.newPlot('Graph', data, layout);
 } //end runEmAll
 
-function sol1(n) {
-    //Implement your brute-force solution here
 
-    countNQueensSolutions = function(n) {
-        return countNQueensHelper(new Board(n), 0);
+var trace1 = {
+  x: [4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384],
+  y: graphdata1,
+  mode: 'lines+markers'
+};
 
-        function countNQueensHelper(board, numPlaced) {
-            var n = board.size();
-            // numPlaced is both our current row and the number of queens on the board
-            // if we've placed n queens, we've found a solution
-            if (numPlaced === n) {
-                return 1;
-            }
+var trace2 = {
+  x: [4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384],
+  y: graphdata2,
+  mode: 'lines+markers'
+};
 
-            var nSols = 0;
+var trace3 = {
+  x: [4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384],
+  y: graphdata3,
+  mode: 'lines+markers'
+};
 
-            // go through each column, testing if placement is valid
-            for (var c = 0; c < n; c++) {
-                board.togglePiece(numPlaced, c);
-                // if current position is unconflicted, recur and 
-                // count the solutions stemming from our current position
-                if (!board.hasAnyQueenConflictsOn(numPlaced, c)) {
-                    nSols += countNQueensHelper(board, numPlaced + 1);
-                }
-                // undo the current position when we've finished exploring this subtree
-                board.togglePiece(numPlaced, c);
-            }
-            return nSols;
-        }
-    }; 
+var data = [ trace1, trace2, trace3 ];
 
-    //Mention reference where you got the solution
-    //Ref: https://www.coursera.org/lecture/what-is-a-proof/n-queens-brute-force-search-optional-OPyaT
-    //Ref: https://www.freecodecamp.org/news/lets-backtrack-and-save-some-queens-1f9ef6af5415/
-    //Ref: https://www.sololearn.com/Discuss/?query=javascript
-} //end sol1
+var layout = {
+  title:'Line and Scatter Plot'
+};
 
-function sol2(n) {
-    //Implement your recursive back-tracking solution here
 
-    countNQueensSolutions = function(n) {
-        return countNQueensHelper(
-            0,
-            new Array(n).fill(false),
-            new Array(2 * n - 1).fill(false),
-            new Array(2 * n - 1).fill(false)
-        );
 
-        function countNQueensHelper(numPlaced, qInCol, qInLDiag, qInRDiag) {
-            var n = qInCol.length;
-            if (numPlaced === n) return 1;
 
-            var r = numPlaced;
-            var nSols = 0;
+function sol1(n){
+	//Implement your brute-force solution here
 
-            // go through each column, testing if placement is valid
-            for (var c = 0; c < n; c++) {
-                var ld = c - r;
-                var rd = r + c;
+	//--This is garbage code: Remove this--//
+	for (var i = 1; i <= n; i++) {
+		for (var j = 1; j <= n ; j=j*2) {
+			for(var k=0;k<50;k++);
+		}//end for j
+	}//end for i
+	//-- End of garbage code --//
 
-                // if current position is valid, recur
-                if (!qInCol[c] && !qInLDiag[ld] && !qInRDiag[rd]) {
-                    (qInCol[c] = true), (qInLDiag[ld] = true), (qInRDiag[rd] = true);
+	//Mention reference where you got the solution
+	//Ref: http://
+	//Ref: If you found any paper
+}//end sol1
 
-                    nSols += countNQueensHelper(r + 1, qInCol, qInLDiag, qInRDiag);
+function sol2(n){
+	//Implement your recursive back-tracking solution here
 
-                    (qInCol[c] = false), (qInLDiag[ld] = false), (qInRDiag[rd] = false);
-                }
-            }
-            return nSols;
-        }
-    };
-  
+	//--This is garbage code: Remove this--//
+	for (var i = 1; i <= n; i++) {
+		for (var j = 1; j <= n; j++) {
+			for(var k=0;k<50;k++);
+		}//end for i
+	}//end for j
+	//-- End of garbage code --//
 
-    //Mention reference where you got the solution
-    //Ref: https://www.codesdope.com/blog/article/backtracking-explanation-and-n-queens-problem/
-    //Ref: https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.735.6147&rep=rep1&type=pdf
-} //end sol2
+	//Mention reference where you got the solution
+	//Ref: http://
+	//Ref: If you found any paper
+}//end sol2
 
-function sol3(n) {
-    //Implement your dynammic programming solution here
+function sol3(n){
+	//Implement your dynammic programming solution here
 
-    countNQueensSolutions = function(n) {
-        return countNQueensHelper(
-            0,
-            new Array(n).fill(false),
-            new Array(2 * n - 1).fill(false),
-            new Array(2 * n - 1).fill(false)
-        );
+	//--This is garbage code: Remove this--//
+	for (var i = 1; i <= n; i++) {
+		for(var k=0;k<50;k++);
+	}//end for j
+	//--End of Garbage Code--//
 
-        function countNQueensHelper(numPlaced, qInCol, qInLDiag, qInRDiag) {
-            var n = qInCol.length;
-            if (numPlaced === n) return 1;
-
-            var r = numPlaced;
-            var nSols = 0;
-
-            // go through each column, testing if placement is valid
-            for (var c = 0; c < n; c++) {
-                var ld = c - r;
-                var rd = r + c;
-
-                // if current position is valid, recur
-                if (!qInCol[c] && !qInLDiag[ld] && !qInRDiag[rd]) {
-                    (qInCol[c] = true), (qInLDiag[ld] = true), (qInRDiag[rd] = true);
-
-                    nSols += countNQueensHelper(r + 1, qInCol, qInLDiag, qInRDiag);
-
-                    (qInCol[c] = false), (qInLDiag[ld] = false), (qInRDiag[rd] = false);
-                }
-            }
-            return nSols;
-        }
-    };
-
-    //Mention reference where you got the solution
-    //Ref: https://www.cs.bgu.ac.il/~michaluz/seminar/nqueen.pdf
-    //Ref: https://www.researchgate.net/publication/258651417_An_Unique_Solution_for_N_queen_Problem
-} //end sol3
+	//Mention reference where you got the solution
+	//Ref: http://
+	//Ref: If you found any paper
+}//end sol3
