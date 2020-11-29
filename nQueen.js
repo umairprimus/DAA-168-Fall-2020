@@ -54,19 +54,22 @@ function runEmAll() {
 var trace1 = {
   x: [4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384],
   y: graphdata1,
-  mode: 'lines+markers'
+  mode: 'lines+markers',
+  name: 'Brute Force'
 };
 
 var trace2 = {
   x: [4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384],
   y: graphdata2,
-  mode: 'lines+markers'
+  mode: 'lines+markers',
+  name: 'Backtracking'
 };
 
 var trace3 = {
   x: [4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384],
   y: graphdata3,
-  mode: 'lines+markers'
+  mode: 'lines+markers',
+  name: 'Dynamic Programming'
 };
 
 var data = [ trace1, trace2, trace3 ];
