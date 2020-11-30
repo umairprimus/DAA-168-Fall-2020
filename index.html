@@ -13,19 +13,35 @@
 	<h3>63307 - S. Taha Aziz</h3><!--This is the 2nd Member of the group-->
 	<h3>63230 - Aziz Ullah</h3><!--This is the 3rd Member of the group-->
 	<h4><a href="https://github.com/umairprimus/DAA-168-Fall-2020">GitHub</a></h4>
+
+	<p>Graph will be activated after clicking run button. It is recommended to use separate buttons for each method instead of running all at one to save time.</p>
 	<p> 
-		<button id="btnRun" onclick="runEmAll()">Run</button>
+		<button id="btnRun" onclick="runEmAll()">Run All Solutions (Will Hang Browser)</button>
 	</p>
+	<h5>Graph will appear here after algorithm is finished running:</h5>
 	
 	<div id='Graph'><!-- Plotly chart will be drawn inside this DIV --></div>
 	
+	<h5>-----------------------</h5>
+
+
+	<p> 
+		<button id="btnBF" onclick="runBrute()">Run BruteForce (CPU Extensive)</button>
+	</p>
+
 	<textarea id="ta_sol1" cols="50" rows="30">Brute Force:</textarea>&nbsp 
 	
 
-	<textarea id="ta_sol2" cols="50" rows="30"></textarea>&nbsp
+	<p> 
+		<button id="btnBT" onclick="runBacktrack()">Run Backtracking</button>
+	</p>
+	<textarea id="ta_sol2" cols="50" rows="30">Backtracking:</textarea>&nbsp
 	
 
-	<textarea id="ta_sol3" cols="50" rows="30"></textarea>
+	<p> 
+		<button id="btnDP" onclick="runDP()">Run Dynamic Programming (CPU Extensive)</button>
+	</p>
+	<textarea id="ta_sol3" cols="50" rows="30">Dynamic Programming:</textarea>
 	
 	
 
