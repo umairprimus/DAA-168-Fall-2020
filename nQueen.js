@@ -7,50 +7,114 @@ var graphdata3 = [];
 
 
 window.onload = function() {
-	console.log("Hooray! Its working");
+  console.log("Hooray! Its working");
+  console.log("Final Project of DAA Fall 2020")
+  console.log("Made by Umair, Taha & Aziz (Class of MCS)")
 	taSol1 = document.getElementById('ta_sol1');
 	taSol2 = document.getElementById('ta_sol2');
 	taSol3 = document.getElementById('ta_sol3');
-	btnRun = document.getElementById('btnRun');
+  btnRun = document.getElementById('btnRun');
+  btnBF = document.getElementById('btnBF');
+  btnBT = document.getElementById('btnBT');
+  btnBF = document.getElementById('btnBF');
 
 } //end window.onload
 
-function runEmAll() {
-    console.log("Final Project of DAA Fall 2020")
-    console.log("Made by Umair, Taha & Aziz (Class of MCS)")
+function runBrute() {
     console.log("Start------------")
-    console.log("Running All Solutions")
+    console.log("Running Brute Force -- The browser will be not responding since brute force takes days to complete.")
     taSol1.value = "";
-    taSol2.value = "";
-    taSol3.value = "";
     var start;
     var end;
     var n = 4;
-    for (var k = 4; k <= 15; k++) {
+    for (var k = 4; k <= 7; k++) {
         //Runs each solution and measures performance in microseconds
         console.log("In Forloop: Line 23, k = "+k+"\n");
         start = performance.now();
-        //sol1(n);
+        sol1(n);
         end = performance.now();
         taSol1.value += "" + n + ", " + (end - start) * 1000 + "\n";
 	      graphdata1[k-4] = (end - start) * 1000;
-	
-        start = performance.now();
-        //sol2(n);
-        end = performance.now();
-        taSol2.value += "" + n + ", " + (end - start) * 1000 + "\n";
-	      graphdata2[k-4] = (end - start) * 1000;
-
-        start = performance.now();
-        sol3(n);
-        end = performance.now();
-        taSol3.value += "" + n + ", " + (end - start) * 1000 + "\n";
-	      graphdata3[k-4] = (end - start) * 1000;
         n = n * 2;
     } //end for
 	Plotly.newPlot('Graph', data, layout);
-} //end runEmAll
+} //end BF
 
+
+function runBacktrack() {
+  console.log("Start------------")
+  console.log("Running Backtracking solution:")
+  taSol1.value = "";
+  taSol2.value = "";
+  taSol3.value = "";
+  var start;
+  var end;
+  var n = 4;
+  for (var k = 4; k <= 16; k++) {
+      console.log("In Forloop: Line 23, k = "+k+"\n");
+      start = performance.now();
+      sol2(n);
+      end = performance.now();
+      taSol2.value += "" + n + ", " + (end - start) * 1000 + "\n";
+      graphdata2[k-4] = (end - start) * 1000;
+  } //end for 
+Plotly.newPlot('Graph', data, layout);
+} //end backtracking
+
+
+function runDP() {
+  console.log("Start------------")
+  console.log("Running Dynamic Programming Solution:")
+  taSol3.value = "";
+  var start;
+  var end;
+  var n = 4;
+  for (var k = 4; k <= 6; k++) {
+      console.log("In Forloop: Line 23, k = "+k+"\n");
+      start = performance.now();
+      sol3(n);
+      end = performance.now();
+      taSol3.value += "" + n + ", " + (end - start) * 1000 + "\n";
+      graphdata3[k-4] = (end - start) * 1000;
+      n = n * 2;
+  } //end for
+Plotly.newPlot('Graph', data, layout);
+} //end DP
+
+
+function runEmAll() {
+  console.log("Start------------")
+  console.log("Running All Solutions")
+  taSol1.value = "";
+  taSol2.value = "";
+  taSol3.value = "";
+  var start;
+  var end;
+  var n = 4;
+  for (var k = 4; k <= 7; k++) {
+      //Runs each solution and measures performance in microseconds
+      console.log("In Forloop: Line 23, k = "+k+"\n");
+      start = performance.now();
+      sol1(n);
+      end = performance.now();
+      taSol1.value += "" + n + ", " + (end - start) * 1000 + "\n";
+      graphdata1[k-4] = (end - start) * 1000;
+
+      start = performance.now();
+      //sol2(n);
+      end = performance.now();
+      taSol2.value += "" + n + ", " + (end - start) * 1000 + "\n";
+      graphdata2[k-4] = (end - start) * 1000;
+
+      start = performance.now();
+      //sol3(n);
+      end = performance.now();
+      taSol3.value += "" + n + ", " + (end - start) * 1000 + "\n";
+      graphdata3[k-4] = (end - start) * 1000;
+      n = n * 2;
+  } //end for
+Plotly.newPlot('Graph', data, layout);
+} //end runEmAll
 
 var trace1 = {
   x: [4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384],
@@ -187,7 +251,86 @@ function sol2(n) {
 function sol3(n){
 	//Implement your dynammic programming solution here
 
-  
+	solveNQ();
+
+function printSolution(board){
+  for(var i=0; i<n; i++){
+    for(var j=0; j<n; j++){
+      document.write(" "+board[i][j]+" ");
+    }
+    document.write("<br>");
+  }
+  document.write("<br>");
+}
+
+function isSafe(board, row, col){
+
+  // Checks the ← direction
+  for(var i=0; i<col; i++){
+    if (board[row][i] === 1) {
+      return false;
+    }
+  }
+
+  // Checks the ↖ direction 
+  for(var i=row, j=col; i>=0 && j>=0; i--, j--){
+    if (board[i][j] === 1) {
+      return false;
+    }
+  }
+
+  // Checks the ↙ direction 
+  for(var i=row, j=col; j>=0 && i<n; i++, j--){
+    if (board[i][j] === 1){
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+function recurseNQ(board, col){
+  if(col===n){
+      printSolution(board); // <-- print another solution when n==8
+    return;  
+  }
+
+  for(var i=0; i<n; i++){
+    if(isSafe(board, i, col)){
+      board[i][col]=1;
+
+      recurseNQ(board, col+1);
+      //if(recurseNQ(board, col+1)===true) //<-- you don't need this
+          // return true;
+
+      board[i][col]=0;
+    }
+  }
+  return false;
+}
+
+
+function solveNQ(){
+  var board = generateBoard(n);
+  recurseNQ(board, 0);
+  //if(recurseNQ(board, 0)===false){
+    //console.log("No solution found");
+   // return false;
+ // }
+ // printSolution(board);
+}
+
+function generateBoard(n){
+  var board=[];
+  for(var i=0; i<n; i++){
+    board[i]=[];
+    for(var j=0; j<n; j++){
+      board[i][j]=0;
+    }
+  }
+  return board;
+}
 
 
 	//Mention reference where you got the solution
