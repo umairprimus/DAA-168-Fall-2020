@@ -21,6 +21,7 @@ The most expensive solution is brute force which tends not to complete in the gi
 
 After that, dynamic programing solution is also very expensive.
 
+Best solution is Backtracking for nQueen problem.
 
 Below is the comparision of all N-Queen Algorithms:
 
