@@ -179,9 +179,11 @@ function noClash(columns, i) {
         }
     }
     return true;
-}
 
-
+//Mention reference where you got the solution
+	//Ref: http://
+	//Ref: Mukherjee, Soham, et al. "TO SOLVE NQueens PROBLEM."
+}//end sol2
 
 
 
@@ -245,7 +247,7 @@ function sol2(n) {
 
 	//Mention reference where you got the solution
 	//Ref: http://
-	//Ref: If you found any paper
+	//Ref: Güldal, Serkan, Veronica Baugh, and Saleh Allehaibi. "N-Queens solving algorithm by sets and backtracking." SoutheastCon 2016. IEEE, 2016.
 }//end sol2
 
 function sol3(n){
@@ -335,5 +337,5 @@ function generateBoard(n){
 
 	//Mention reference where you got the solution
 	//Ref: http://
-	//Ref: If you found any paper
+	//Ref: Gwee, Bah-Hwee, and Meng-Hiot Lim. "An evolution search algorithm for solving N-queen problems." International journal of computer applications in technology 24.1 (2005): 43-48.
 }//end sol3
