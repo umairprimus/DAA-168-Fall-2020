@@ -21,4 +21,6 @@ The most expensive solution is brute force which tends not to complete in the gi
 
 After that, dynamic programing solution is also very expensive.
 
+Below is the comparision of all N-Queen Algorithms:
+
 ![alt text](https://i.stack.imgur.com/e2TGT.png)
