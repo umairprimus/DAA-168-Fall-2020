@@ -5,7 +5,6 @@ var graphdata2 = [];
 var graphdata3 = [];
 
 
-
 window.onload = function() {
   console.log("Hooray! Its working");
   console.log("Final Project of DAA Fall 2020")
